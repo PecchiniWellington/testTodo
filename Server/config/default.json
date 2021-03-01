@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://wellington:Wellingtonpecchini10@cluster0.q4fhv.mongodb.net/todoListFullStack?retryWrites=true&w=majority",
+  "jwtToken": "mySecretTokenForToDoListFullStack"
+}
