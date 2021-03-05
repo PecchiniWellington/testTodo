@@ -14,7 +14,9 @@ export const CustomInput = ({
   const idForInput = uuidv4();
   return (
     <div>
-      <label htmlFor={`${label}${idForInput}`}>{label}</label>
+      <label className="labels-tasklist" htmlFor={`${label}${idForInput}`}>
+        {label}
+      </label>
       <input
         type={type}
         id={`${label}${idForInput}`}

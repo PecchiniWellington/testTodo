@@ -38,7 +38,7 @@ export const taskListReducer = (state = initialState, action) => {
         isFetching: true,
       };
     case actionTypes.FETCH_TASKS_ACTION_SUCCESS:
-      return { ...state, tasks: action.payload.tasks, isFetching: false };
+      return { ...state, tasks: action.payload, isFetching: false };
     case actionTypes.FETCH_TASKS_ACTION_ERROR:
       return { ...state, errorMessage: action.payload, isFetching: false };
     case actionTypes.REMOVE_TASKS_ACTION:

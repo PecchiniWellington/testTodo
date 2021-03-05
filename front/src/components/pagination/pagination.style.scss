@@ -1,0 +1,44 @@
+.pagination {
+  padding: 10px;
+  color: white;
+  font-size: 50px;
+  display: flex;
+
+  .active {
+    margin: 0 5px;
+    border: none;
+    background: #5bef5bb0;
+    padding: 10px;
+    color: white;
+    position: relative;
+    width: 50px;
+    height: 60px;
+    .center-text {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .normal {
+    margin: 0 5px;
+    border: none;
+    background: #727272;
+    padding: 10px;
+    color: white;
+    position: relative;
+    width: 50px;
+    height: 60px;
+    .center-text {
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &:hover {
+      background: #555555;
+    }
+  }
+}

@@ -13,13 +13,16 @@ export const CustomTextArea = ({
   const idForTextArea = uuidv4();
   return (
     <div>
-      <label htmlFor={`${label}${idForTextArea}`}>{label}</label>
+      <label className="labels-tasklist" htmlFor={`${label}${idForTextArea}`}>
+        {label}
+      </label>
       <textarea
         id={`${label}${idForTextArea}`}
         name={name}
         placeholder={placeholder}
         value={value}
-        onChange={(e) => changeValue(e)}></textarea>
+        onChange={(e) => changeValue(e)}
+      ></textarea>
     </div>
   );
 };

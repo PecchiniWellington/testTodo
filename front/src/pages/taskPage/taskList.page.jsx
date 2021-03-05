@@ -11,34 +11,52 @@ import {
   removeTaskStart,
 } from "../../store/taskList/taskList.actions";
 import { Toast } from "../../components/toast/toast.component";
+import Pagination from "../../components/pagination/pagination.component";
+import { withRouter } from "react-router";
 
 export class TaskList extends Component {
   componentDidMount() {
-    const { fetchTasks } = this.props;
-    fetchTasks();
+    if (this.props.tasks) {
+      this.props.fetchTasks(this.props.page);
+    }
   }
+  checkPage = (p) => {
+    this.props.fetchTasks(p);
+  };
+  rend = () => {
+    if (this.props.tasks.results) {
+      return this.props.tasks.results.map((card, i) => {
+        return (
+          <TaskCard
+            id={card._id}
+            key={i}
+            title={card.title}
+            description={card.description}
+            status={card.status}
+            date={card.date}
+            removeTask={this.props.removeTask}
+          />
+        );
+      });
+    } else {
+      return [];
+    }
+  };
+  paginazione = () => {
+    if (this.props.tasks) {
+      return <Pagination callBack={this.checkPage} tasks={this.props.tasks} />;
+    }
+  };
 
+  // TODO: create due tipi di paginazione 1) quello con previous e next e l'altro con la lista completa
   render() {
-    const { tasks, successMessage, errorMessage } = this.props;
+    const { successMessage, errorMessage } = this.props;
     return (
       <div>
-        <h1 className='title-taskList'>Task List</h1>
-        <Container customClassName='taskListContainer'>
-          {tasks
-            ? tasks.map((card, i) => {
-                return (
-                  <TaskCard
-                    id={card._id}
-                    key={i}
-                    title={card.title}
-                    description={card.description}
-                    status={card.statuts}
-                    date={card.date}
-                    removeTask={this.props.removeTask}
-                  />
-                );
-              })
-            : []}
+        <h1 className="title-taskList">Task List</h1>
+        <Container customClassName="taskListContainer">
+          {this.rend()}
+          {this.paginazione()}
           <Toast showToast={this.props.showToastProp}>
             {successMessage || errorMessage}
           </Toast>
@@ -48,19 +66,21 @@ export class TaskList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    tasks: state.task.tasks,
-    isFetching: state.task.isFetching,
-    showToastProp: state.task.showToast,
-    successMessage: state.task.successMessage,
-    errorMessage: state.task.errorMessage,
-  };
-};
+const mapStateToProps = (state) => ({
+  tasks: state.task.tasks,
+  page: state.common.page,
+  isFetching: state.task.isFetching,
+  showToastProp: state.task.showToast,
+  successMessage: state.task.successMessage,
+  errorMessage: state.task.errorMessage,
+});
 const mapDispatchToProps = (dispatch) => ({
-  fetchTasks: () => dispatch(fetchTaskStart()),
+  fetchTasks: (page) => dispatch(fetchTaskStart(page)),
   removeTask: (id) => dispatch(removeTaskStart(id)),
   hideToast: () => dispatch(hideToastAction()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(TaskList));

@@ -23,9 +23,10 @@ export function* onCreateTaskStart() {
   yield takeEvery(taskActionTypes.CREATE_TASKS_ACTION, createTasksAsync);
 }
 
-export function* getAllTasksAsync() {
+export function* getAllTasksAsync(page) {
   try {
-    const tasks = yield call(service.getAllTasks);
+    const tasks = yield call(service.getAllTasks, page);
+
     yield put(actions.fetchTaskActionSuccess(tasks));
   } catch (error) {
     yield put(actions.fetchTaskActionError(error.message));
@@ -54,6 +55,7 @@ export function* updateTasksAsync(action) {
   try {
     const tasks = yield call(service.updateTask, action.payload);
     yield put(actions.updateTaskActionSuccess(tasks));
+    yield put(actions.fetchTaskStart());
   } catch (error) {
     yield put(actions.updateTaskActionError(error.message));
   }

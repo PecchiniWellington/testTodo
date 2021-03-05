@@ -2,8 +2,7 @@ const Task = require("../models/task");
 
 exports.getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
-    res.status(200).send({ tasks });
+    await res.send(res.pagination);
   } catch (error) {
     res.status(400).send({ messageError: error.message });
     console.log(error);
@@ -25,6 +24,7 @@ exports.getTask = async (req, res) => {
 };
 
 exports.createTask = async (req, res, next) => {
+  console.log("REQ BODY", req.body);
   try {
     const task = new Task({ ...req.body });
     await task.save();

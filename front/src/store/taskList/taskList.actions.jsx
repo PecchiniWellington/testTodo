@@ -13,8 +13,9 @@ export const createTaskActionError = (error) => ({
   payload: error,
 });
 
-export const fetchTaskStart = () => ({
+export const fetchTaskStart = (page) => ({
   type: taskListActionTypes.FETCH_TASKS_ACTION,
+  payload: page,
 });
 export const fetchTaskActionSuccess = (task) => ({
   type: taskListActionTypes.FETCH_TASKS_ACTION_SUCCESS,

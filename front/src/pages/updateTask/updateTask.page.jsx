@@ -16,6 +16,7 @@ import {
   updateTaskStart,
   setValueAction,
 } from "../../store/taskList/taskList.actions";
+import { withRouter } from "react-router";
 
 class UpdateTaskPage extends Component {
   componentDidMount() {
@@ -44,45 +45,45 @@ class UpdateTaskPage extends Component {
       id: this.props.match.params.id,
       request: requestForm,
     });
-    //this.props.history.push("/task-list");
+    this.props.history.push("/task-list");
   };
   render() {
     const status = ["created", "in progress", "closed"];
     const id = uuidv4();
     return (
       <div>
-        <h1 className='title-createTask'>Update Task</h1>
-        <Container customClassName='taskListContainer'>
-          <div className='container'>
-            <form action='/action_page.php'>
+        <h1 className="title-createTask">Update Task</h1>
+        <Container customClassName="taskListContainer">
+          <div className="container">
+            <form action="/action_page.php">
               <CustomInput
                 changeValue={this.onChangeValue}
                 id={uuidv4()}
-                label='Title'
-                name='title'
-                placeholder='Your name...'
-                type='text'
+                label="Title"
+                name="title"
+                placeholder="Your name..."
+                type="text"
                 value={this.props.singleTask.title}
               />
               <CustomSelect
                 changeValue={this.onChangeValue}
                 id={uuidv4()}
-                label='Status'
-                name='status'
-                stateValue={this.props.singleTask?.status}
+                label="Status"
+                name="status"
+                stateValue={this.props.singleTask.status}
                 values={status}
               />
               <CustomTextArea
                 changeValue={this.onChangeValue}
                 id={uuidv4()}
-                label='Description'
-                name='description'
-                placeholder='Write something..'
-                value={this.props.singleTask?.description}
+                label="Description"
+                name="description"
+                placeholder="Write something.."
+                value={this.props.singleTask.description}
               />
               <CustomButton
-                children='Submit'
-                type='submit'
+                children="Submit"
+                type="submit"
                 onClick={this.submitForm}
               />
             </form>
@@ -112,4 +113,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateTaskPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(UpdateTaskPage));

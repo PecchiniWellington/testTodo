@@ -14,6 +14,8 @@ export const CustomSelect = ({
    * *ricordarsi di far mandare values dal backend
    */
 
+  /* FIXME: problem with status*/
+
   const idForInput = uuidv4();
 
   const isOptionSelected = () => {
@@ -27,12 +29,15 @@ export const CustomSelect = ({
   };
   return (
     <div>
-      <label htmlFor={`${label}${idForInput}`}>{label}</label>
+      <label className="labels-tasklist" htmlFor={`${label}${idForInput}`}>
+        {label}
+      </label>
       <select
         id={`${label}${idForInput}`}
         name={name}
         value={stateValue}
-        onChange={(e) => changeValue(e)}>
+        onChange={(e) => changeValue(e)}
+      >
         {isOptionSelected()}
       </select>
     </div>

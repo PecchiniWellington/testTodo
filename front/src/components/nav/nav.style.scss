@@ -1,12 +1,11 @@
 ul {
   list-style-type: none;
   margin: 0;
+  width: 100%;
+  box-sizing: border-box;
   padding: 0;
   overflow: hidden;
   background-color: #333;
-  li {
-    float: left;
-  }
 
   li a {
     display: block;
@@ -19,7 +18,37 @@ ul {
   li a:hover {
     background-color: rgb(31, 30, 30);
   }
+  li {
+    float: left;
+  }
 }
 .selected {
   background-color: #111;
+}
+
+.signIn-SignOut {
+  float: right; /* last li item */
+  top: 10px;
+}
+.signOut {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 15px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  height: auto;
+  box-sizing: border-box;
+
+  &:hover {
+    background-color: rgb(160, 2, 2);
+  }
+}
+.signIn {
+  background-color: green;
+  color: white;
+  &:hover {
+    background-color: rgb(0, 85, 0);
+  }
 }

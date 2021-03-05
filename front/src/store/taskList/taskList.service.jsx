@@ -11,9 +11,9 @@ export const createTask = async (value) => {
     });
 };
 
-export const getAllTasks = async () => {
+export const getAllTasks = async (action) => {
   return await axios
-    .get("http://localhost:3500/api/tasks")
+    .get(`http://localhost:3500/api/tasks?page=${action.payload}&limit=2`)
     .then((response) => {
       return response.data;
     })

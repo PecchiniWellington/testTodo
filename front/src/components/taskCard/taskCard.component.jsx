@@ -2,6 +2,7 @@ import React from "react";
 import "./taskCard.style.scss";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import Moment from "react-moment";
 
 import { CustomButton } from "../custom-button/custom-button.component";
 
@@ -14,13 +15,15 @@ const TaskCard = ({
   id,
   history,
 }) => {
+  const dateToFormat = new Date(date);
   return (
-    <div className='chip'>
+    <div className={`chip ${status}`}>
       <span
-        className='closebtn'
+        className="closebtn"
         onClick={() => {
           removeTask(id);
-        }}>
+        }}
+      >
         &times;
       </span>
       {/*  <img
@@ -29,18 +32,18 @@ const TaskCard = ({
         width='96'
         height='96'
       /> */}
-      <div>
-        <h1>{title}</h1>
-        <div>{description}</div>
-        <div>{status}</div>
-        <div>{date}</div>
-
-        <CustomButton
-          children='modify'
-          type='button'
-          onClick={() => history.push(`/update-task/${id}`)}
-        />
+      <span className="card-title">{title.toUpperCase()}</span>
+      <span className="card-description">{description}</span>
+      <div className={`${status}-card-status-date-container`}>
+        <span className="card-status">{status}</span>
+        <Moment className="card-date" format="YYYY/MM/DD" date={dateToFormat} />
       </div>
+      {/*  <CustomButton
+          buttonStyle="modify-button"
+          children="modify"
+          type="button"
+          onClick={() => history.push(`/update-task/${id}`)}
+        /> */}
     </div>
   );
 };

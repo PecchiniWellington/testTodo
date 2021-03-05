@@ -19,9 +19,6 @@ export class CreateTaskPage extends Component {
     description: "",
   };
   onChangeValue = (e) => {
-    console.log("[e.target.name]: e.target.value,", {
-      [e.target.name]: e.target.value,
-    });
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value,
@@ -50,38 +47,39 @@ export class CreateTaskPage extends Component {
 
     return (
       <div>
-        <h1 className='title-createTask'>Create Task</h1>
-        <Container customClassName='taskListContainer'>
-          <div className='container'>
-            <form action='/action_page.php'>
+        <h1 className="title-createTask">Create Task</h1>
+        <Container customClassName="taskListContainer">
+          <div className="container">
+            <form action="/action_page.php">
               <CustomInput
                 value={this.state.value}
-                label='Title'
-                type='text'
-                id='title'
-                name='title'
-                placeholder='Your name...'
+                label="Title"
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Your name..."
                 changeValue={this.onChangeValue}
               />
               <CustomSelect
-                label='Status'
-                id='status'
-                name='status'
+                label="Status"
+                id="status"
+                name="status"
                 stateValue={this.state.status.status}
                 values={status}
                 changeValue={this.onChangeValue}
               />
               <CustomTextArea
                 value={this.state.value}
-                label='Description'
-                id='description'
-                name='description'
-                placeholder='Write something..'
+                label="Description"
+                id="description"
+                name="description"
+                placeholder="Write something.."
                 changeValue={this.onChangeValue}
               />
               <CustomButton
-                children='Submit'
-                type='submit'
+                buttonStyle="normal-button"
+                children="Submit"
+                type="submit"
                 onClick={this.submitForm}
               />
             </form>

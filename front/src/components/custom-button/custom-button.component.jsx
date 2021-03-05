@@ -11,7 +11,7 @@ export const CustomButton = ({
   return (
     <div className={buttonShape}>
       <button className={buttonStyle} onClick={onClick} type={type}>
-        <div className='center-text'>{children}</div>
+        <div className="center-text">{children}</div>
       </button>
     </div>
   );
